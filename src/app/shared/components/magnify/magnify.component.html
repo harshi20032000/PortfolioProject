@@ -1,0 +1,5 @@
+<div class="magnify-overlay" *ngIf="isVisible" (click)="closeMagnify()">
+  <div class="magnify-card" (click)="$event.stopPropagation()">
+    <img [src]="magnifiedContent" alt="Magnified Image" />
+  </div>
+</div>

@@ -1,0 +1,140 @@
+<app-header [isBannerPresent]="bannerImages && bannerImages.length > 0">
+</app-header>
+<app-banner [bannerImages]="bannerImages"></app-banner>
+
+@defer (on viewport) {
+<section id="contact-page-section" class="contact-page-section">
+  <form [formGroup]="queryForm">
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="name">First Name</label>
+        <mat-form-field appearance="outline" class="mat-input">
+          <input matInput formControlName="firstName" type="text" name="first-name" id="first-name" required />
+          <mat-error *ngIf="queryForm.get('firstName')?.hasError('required')">
+            First Name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Last Name</label>
+        <mat-form-field appearance="outline" class="mat-input">
+          <input matInput formControlName="lastName" type="text" name="last-name" id="last-name" required />
+          <mat-error *ngIf="queryForm.get('lastName')?.hasError('required')">
+            Last name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="name">Email</label>
+        <mat-form-field appearance="outline" class="mat-input">
+          <input matInput formControlName="email" type="email" name="email" id="email" required />
+          <mat-error *ngIf="queryForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <label for="name">Number</label>
+        <mat-form-field appearance="outline" class="mat-input">
+          <input matInput formControlName="number" type="number" name="number" id="number" required />
+          <mat-error *ngIf="queryForm.get('number')?.hasError('required')">
+            Number is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="name">Message</label>
+        <mat-form-field appearance="outline" class="mat-input">
+          <textarea matInput formControlName="queryMessage" name="message" title="message" id="message" required>
+          </textarea>
+          <mat-error *ngIf="queryForm.get('queryMessage')?.hasError('required')">
+            Message is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button (click)="sendQuery()" type="button" class="btn contact-message">
+      Send Query
+    </button>
+  </form>
+  <div class="contact-view">
+    <div class="contact-info">
+      <h1>contact <span>info</span></h1>
+      <div class="contact-info-table">
+        <div class="table-content">
+          <h4>Corporate Office</h4>
+          <p>
+            {{ officeLocation.corporateOffice }}
+          </p>
+        </div>
+        <div class="table-content">
+          <h4>Factory Address</h4>
+          <p>
+            {{ officeLocation.factory }}
+          </p>
+        </div>
+      </div>
+      <div class="contact-info-table">
+        <div class="table-content">
+          <h4>Sales Department</h4>
+          <p>
+            {{ salesDepartmentNum1 }}
+          </p>
+        </div>
+        <div class="table-content">
+          <h4>Service Department</h4>
+          <p>
+            {{ salesDepartmentNum2 }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="map-section">
+      <div class="map">
+        <iframe class="map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.115630953414!2d88.4353635!3d22.574778199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275e458febddf%3A0xa5fb7aaab4e3f4b2!2sImagine%20Tech%20Park%20-%20Genpact%20Kolkata%20Salt%20Lake%20Sector%20V!5e0!3m2!1sen!2sin!4v1709834636890!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+} @placeholder {
+<div>Contact Section</div>
+}
+
+<div id="contact-footer" class="footer contact-footer">
+  <nav class="footer-section">
+    <a class="cursor-pointer" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/">
+      home
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/about" routerLinkActive="active" ariaCurrentWhenActive="page">
+      about
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/products" routerLinkActive="active" ariaCurrentWhenActive="page">
+      products
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/services" routerLinkActive="active" ariaCurrentWhenActive="page">
+      services
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/reviews" routerLinkActive="active" ariaCurrentWhenActive="page">
+      reviews
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/contact" routerLinkActive="active" ariaCurrentWhenActive="page">
+      contact us
+    </a>
+  </nav>
+  <div class="footer-link">www.movestone.in</div>
+</div>

@@ -1,0 +1,70 @@
+<app-header></app-header>
+
+@defer (on viewport) {
+<section id="admin-products" class="products admin-products">
+  @if (contents && contents.length > 0) {
+  <div class="products-part">
+    @for (content of getContents; track $index) {
+    <div class="product-card">
+      <div class="image" (click)="editProductDetails(content?.productID)">
+        @if (content.imageURL) {
+        <img [src]="getImagesByColor(content)" alt="image" class="product-image" loading="lazy" />
+        } @else {
+        <img src="{{ assetPath }}/Image-not-available.jpg" alt="No-image" class="product-image no-image" loading="lazy" />
+        }
+
+        <div class="icon">
+          <img src="{{ assetPath }}/edit-icon.svg" alt="" />
+        </div>
+      </div>
+      <div class="product-info">
+        <h2>{{ content?.productName }}</h2>
+        <p>
+          @for(eachFeature of content?.features?.split(','); track $index) {
+          {{ eachFeature }}
+          @if ($index
+          < (content?.features?.split(',').length - 1)) { <img src="{{ assetPath }}/arrow.jpg" alt="" />
+          }
+          }
+        </p>
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex gap-3">
+            <button type="button" class="delete-button" (click)="removeProduct($index)">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+            <button type="button" class="visible-button" (click)="toggleVisibility(content, $index)">
+              @if (content.visible === 'Y') {
+              <i class="fa-regular fa-eye-slash"></i>
+              } @else {
+              <i class="fa-regular fa-eye"></i>
+              }
+            </button>
+          </div>
+          <div class="color-options">
+            @for(eachColor of content?.colorOptions?.split(','); track eachColor) {
+            <span class="color-dot" [ngStyle]="{'background-color': eachColor}" (click)="changeSelectedColor(content, eachColor)"></span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="pagination">
+    <div *ngFor="let item of [].constructor(getNumberOfPages); let i = index">
+      <a (click)="setIndex(i)" [ngClass]="{ active: currentPage === i }">
+        {{ i + 1 }}
+      </a>
+    </div>
+    <div class="forward" (click)="nextPage()">>></div>
+  </div>
+  }
+
+  <button class="btn float" (click)="addNewproduct()">
+    <i class="fa fa-plus"></i>
+  </button>
+</section>
+} @placeholder {
+<div>Featured Section</div>
+}

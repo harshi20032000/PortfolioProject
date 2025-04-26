@@ -1,0 +1,68 @@
+<app-header></app-header>
+
+@defer (on viewport) {
+<section id="query-list-view" class="query-list-view">
+  <div class="buttons-container">
+    <button (click)="navigateToControlPanel()" class="btn d-flex justify-content-center align-items-center gap-4" type="button">
+      <i class="fa-solid fa-user-tie fa-lg"></i>
+      Go to Admin Dashboard
+    </button>
+
+    <button (click)="downloadExcel()" class="btn d-flex justify-content-center align-items-center gap-3" type="button">
+      <i class="fa-solid fa-download fa-lg"></i>
+      Download Excel
+    </button>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <mat-tab-group (selectedTabChange)="changeTableData($event)">
+      <mat-tab [label]="eachTab.name" [id]="eachTab.month" *ngFor="let eachTab of tabs">
+        <app-query-list [selectedTab]="selectedTab" [ELEMENT_DATA]="filteredElementData"></app-query-list>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>
+
+} @placeholder {
+<div>product View Section</div>
+}
+
+<ng-container *ngIf="emailList?.length > 0">
+  <table id="excel-table">
+    <tr>
+      <th>Email</th>
+    </tr>
+    <tr *ngFor="let item of emailList">
+      <td>{{ item }}</td>
+    </tr>
+  </table>
+</ng-container>
+
+<div id="query-footer" class="footer">
+  <nav class="footer-section">
+    <a class="cursor-pointer" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/">
+      home
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/about" routerLinkActive="active" ariaCurrentWhenActive="page">
+      about
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/products" routerLinkActive="active" ariaCurrentWhenActive="page">
+      products
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/services" routerLinkActive="active" ariaCurrentWhenActive="page">
+      services
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/reviews" routerLinkActive="active" ariaCurrentWhenActive="page">
+      reviews
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/contact" routerLinkActive="active" ariaCurrentWhenActive="page">
+      contact us
+    </a>
+  </nav>
+  <div class="footer-link">www.movestone.in</div>
+</div>

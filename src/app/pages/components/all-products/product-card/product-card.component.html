@@ -1,0 +1,38 @@
+<div class="product-card">
+  <div class="image" (click)="magnifyCard()">
+    <swiper-container #productSwiper fmSwiper [config]="productConfig" class="product-slider" init="false">
+      @for (eachProduct of content?.productPictureDetails; track eachProduct) {
+      <swiper-slide>
+        <img [src]="eachProduct?.productImageURL" alt="image" class="product-image" loading="lazy" />
+      </swiper-slide>
+      }
+    </swiper-container>
+
+    <div class="icon">
+      <img src="{{ assetPath }}/search.png" alt="" />
+    </div>
+  </div>
+  <div class="product-info">
+    <h2>{{ content?.productName }}</h2>
+    <p>
+      @for(eachFeature of content?.features?.split(','); track $index) {
+        {{ eachFeature }}
+        @if ($index < content?.features?.split(',').length - 1) 
+          { 
+            <img src="{{ assetPath }}/arrow.jpg" alt="" />
+          } 
+      }
+    </p>
+    <div class="d-flex align-items-center justify-content-between">
+      <button type="button" class="details-button" (click)="checkProduct(content?.productID)">
+        Details
+      </button>
+      <div class="color-options">
+        @for(eachColor of content.colorOptions.split(','); track eachColor) {
+        <span class="color-dot" [ngStyle]="{'background-color': eachColor}"
+          (click)="changeSelectedColor(eachColor)"></span>
+        }
+      </div>
+    </div>
+  </div>
+</div>

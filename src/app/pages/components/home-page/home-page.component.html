@@ -1,0 +1,438 @@
+<app-header [isBannerPresent]="bannerImages && bannerImages.length > 0">
+</app-header>
+<app-banner [bannerImages]="bannerImages"></app-banner>
+@defer (on viewport) {
+<section class="home-about-us" id="home-about-us">
+  <h1 class="heading">
+    <div class="underline"></div>
+    <span>Why </span>
+    <p>We</p>
+  </h1>
+  <div class="about-us-body">
+    <div class="about-us-image">
+      <img src="{{ assetPath }}/pic1.png" alt="" />
+    </div>
+    <div class="about-us-text">
+      <div class="about-us-main-text">
+        Move Stone E-rickshaw is engaged in offering an intensive range of
+        E-vehicles. Our E-rickshaw are acknowledged in the automotive market for
+        their comfortable rides, with better handling and bringing out battery
+        efficiency at competitive prices.Move Stone is one of the most famous
+        and demanding brand for Electric Vehicle and battery E-rickshaw in
+        India. As Steve Jobs said “Be a yardstick of quality some people aren’t
+        used to an environment where excellence is expected”. Our E-rickshaw are
+        highly comfortable for the passengers as well as the driver and this is
+        pollution free and Eco-friendly.
+      </div>
+
+      <div class="d-grid gap-3">
+        <ng-container *ngFor="let eachAboutUs of aboutUsConstant">
+          <div class="d-flex gap-4 align-items-center">
+            <span class="about-us-icon material-symbols-outlined">
+              task_alt
+            </span>
+            {{ eachAboutUs }}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</section>
+} @placeholder {
+<div id="abount-us-section">Why We</div>
+} @defer (on viewport) {
+<div *ngIf="productDetails?.products?.length > 0" class="vehicles" id="vehicles">
+  <div class="featured-item">
+    <div class="featured-item-heading">
+      <h2 class="heading text-white text-uppercase">Our Products</h2>
+
+      <div class="hex-container">
+        <button type="button" title="product-button-prev" id="product-button-prev" class="hexagon product-button-prev">
+          <img src="{{ assetPath }}/arrow-yellow.png" alt="" />
+        </button>
+        <button type="button" id="product-button-next" title="product-button-next" class="hexagon product-button-next">
+          <img src="{{ assetPath }}/arrow-yellow1.png" alt="" />
+        </button>
+      </div>
+    </div>
+
+    <swiper-container fmSwiper [config]="vehicleConfig" init="false" class="vehicles-slider">
+      @for (eachProduct of productDetails.products; track $index) {
+      <swiper-slide class="feature-box">
+        <div class="box">
+          <div id="vehicles-content-{{ $index }}" class="content">
+            <div class="content-text">
+              <h3>{{ eachProduct?.productName }}</h3>
+              <p>
+                @for(eachFeature of eachProduct?.features?.split(','); track
+                eachFeature){
+                <span class="border-end border-white">{{ eachFeature }}</span>
+                }
+              </p>
+            </div>
+            <button type="button" class="feature-btn btn" (click)="checkProduct(eachProduct?.productID)">
+              Details
+            </button>
+          </div>
+          @if (eachProduct?.imageURL) {
+          <img [src]="eachProduct.imageURL" alt="image" class="vehicle-image" loading="lazy" />
+          } @else {
+          <img src="{{ assetPath }}/Image-not-available.jpg" alt="No-image" class="vehicle-image" loading="lazy" />
+          }
+        </div>
+        <img src="{{ assetPath }}/line-featured.png" class="feature-box-pagination" alt="" />
+      </swiper-slide>
+      }
+    </swiper-container>
+  </div>
+</div>
+} @placeholder {
+<div id="our-products-section">Our Products</div>
+} @defer (on viewport) {
+<section id="services" class="services">
+  <h1 class="heading services-heading" id="services-heading">
+    <div class="underline"></div>
+    <p>Our</p>
+    <span> services</span>
+  </h1>
+  <div class="content">
+    <div class="image-container">
+      <img src="{{ assetPath }}/bg-service.jpg" alt="Rickshaw" />
+    </div>
+    <table class="services-list">
+      <tr>
+        <td class="service-icon" width="20%">
+          <div class="icon">
+            <img src="{{ assetPath }}/icon1.png" alt="Electric Rickshaw Sales" />
+          </div>
+        </td>
+        <td class="service-item">
+          <div class="details">
+            <h3>Electric Rickshaw Sales</h3>
+            <p>
+              Visit Newest Movestone Outlet To See Latest In Technology And You
+              Can Put Enquiry Here, Our Sales Person will Call You.
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="service-icon" width="20%">
+          <div class="icon">
+            <img src="{{ assetPath }}/icon2.png" alt="Electric Rickshaw Sales" />
+          </div>
+        </td>
+        <td class="service-item">
+          <div class="details">
+            <h3>Spare Parts Sales</h3>
+            <p>
+              We Sale Only Genuine And Branded Products With Highly-End
+              Warranty. Check Our Products Catalogue Or Visit Offline.
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="service-icon" width="20%">
+          <div class="icon">
+            <img src="{{ assetPath }}/icon3.png" alt="Electric Rickshaw Sales" />
+          </div>
+        </td>
+        <td class="service-item">
+          <div class="details">
+            <h3>Full Insurance</h3>
+            <p>
+              Our Insurance Company Covers Our Users Any Detailed Estimated Loss
+              Or Damage In Case User's Have Accidents.
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="service-icon" width="20%">
+          <div class="icon">
+            <img src="{{ assetPath }}/icon4.png" alt="Electric Rickshaw Sales" />
+          </div>
+        </td>
+        <td class="service-item">
+          <div class="details">
+            <h3>Battery Replacement</h3>
+            <p>
+              Replace Your Old Battery With Original OEM Batteries Of Your
+              Choice And Sell Old Batteries At One Place.
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="service-icon" width="20%">
+          <div class="icon">
+            <img src="{{ assetPath }}/icon5.png" alt="Electric Rickshaw Sales" />
+          </div>
+        </td>
+        <td class="service-item">
+          <div class="details">
+            <h3>Become A Dealer</h3>
+            <p>
+              We Would Like You To Be A Part Of Our Future Forward Journey.
+              Please Contact Our Office Or Fill Form On This Link To Apply For
+              Nonotronic India Dealership.
+            </p>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="service-icon" width="20%">
+          <div class="icon">
+            <img src="{{ assetPath }}/icon6.png" alt="Electric Rickshaw Sales" />
+          </div>
+        </td>
+        <td class="service-item">
+          <div class="details">
+            <h3>24/7 Support</h3>
+            <p>
+              Regardless Of Whether You Have To Get A Tyre Changed, Need An
+              Expert Look Into Your Electric Vehicles Mechanism, You Can Reach
+              Out To Us At Any Time And Avail Yourself Of The Best Assistance
+              For Electric Situations.
+            </p>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</section>
+} @placeholder {
+<div id="services-section">Services Section</div>
+} @defer (on viewport) {
+<section id="our-team" class="our-team">
+  <h1>Key People</h1>
+  <div class="team-members">
+    <div class="team-member">
+      <img src="{{ assetPath }}/team1.jpg" alt="Courtney Henry" />
+    </div>
+    <div class="team-member">
+      <img src="{{ assetPath }}/team2.jpg" alt="Jerome Bell" />
+    </div>
+    <div class="team-member">
+      <img src="{{ assetPath }}/team3.jpg" alt="Jerome Bell" />
+    </div>
+  </div>
+</section>
+} @placeholder {
+<div id="team-section">Team Section</div>
+} @defer (on viewport) {
+<section id="reviews" class="testimonial" *ngIf="productDetails?.testimonials?.length > 0">
+  <div class="testimonial-content">
+    <div class="testimonial-text">
+      <h4>Our Testimonial</h4>
+      <div class="underscore"></div>
+      <div class="d-flex align-items-center justify-content-between">
+        <h2>What Client’s Says</h2>
+        <div class="navigation">
+          <span id="testimonial-left-button" title="testimonial-left-button">
+            <img src="{{ assetPath }}/arrow-testimonials-1.jpg" alt="" />
+          </span>
+          <span id="testimonial-right-button" title="testimonial-right-button">
+            <img src="{{ assetPath }}/arrow-testimonials-2.jpg" alt="" />
+          </span>
+        </div>
+      </div>
+
+      <swiper-container fmSwiper [config]="testimonialConfig" init="false">
+        @for (eachReview of productDetails.testimonials; track eachReview) {
+        <swiper-slide class="swiper">
+          <p>{{ eachReview.testimonial }}</p>
+          <div class="client-info">
+            <img class="client-image" [src]="eachReview.imageURL" [alt]="eachReview.testimonialAuthor" />
+            <h3>{{ eachReview.testimonialAuthor }}</h3>
+          </div>
+        </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+    <div class="testimonial-image">
+      <img src="{{ assetPath }}/testimonials-pic.jpg" alt="Client Image" />
+    </div>
+  </div>
+</section>
+} @placeholder {
+<div id="review-section">Reviews Section</div>
+} @defer (on viewport) {
+<div id="contact-section" class="contact-section">
+  <div class="contact">
+    <form [formGroup]="queryForm" class="contact-form">
+      <div class="heading">Need a special deal?</div>
+      <div class="heading">Contact us</div>
+      <label class="input-field">
+        <input type="text" formControlName="queryName" placeholder="Your Name" name="name" id="name" required />
+        <div class="error-message">
+          <ng-container *ngIf="
+              queryForm.get('queryName')?.touched &&
+              queryForm.get('queryName')?.hasError('required')
+            ">
+            Name is required
+          </ng-container>
+        </div>
+      </label>
+
+      <label class="input-field">
+        <input formControlName="queryEmail" type="email" placeholder="Your Email" name="email" id="email-contact" required />
+        <div class="error-message">
+          <ng-container *ngIf="
+              queryForm.get('queryEmail')?.touched &&
+              queryForm.get('queryEmail')?.hasError('required')
+            ">
+            Email is required
+          </ng-container>
+        </div>
+      </label>
+
+      <label class="input-field">
+        <input formControlName="queryPhone" type="number" name="number" placeholder="Your Number" id="number" required />
+        <div class="error-message">
+          <ng-container *ngIf="
+              queryForm.get('queryPhone')?.touched &&
+              queryForm.get('queryPhone')?.hasError('required')
+            ">
+            Number is required
+          </ng-container>
+        </div>
+      </label>
+
+      <label class="input-field">
+        <textarea formControlName="queryMessage" placeholder="Your Message (Optional)" name="message" id="message">
+        </textarea>
+      </label>
+
+      <button (click)="sendQuery()" type="button" class="contact-btn btn">
+        Send Query
+      </button>
+    </form>
+  </div>
+  <div class="contact-view">
+    <div class="map-section">
+      <div class="map">
+        <iframe class="map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3684.115630953414!2d88.4353635!3d22.574778199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a0275e458febddf%3A0xa5fb7aaab4e3f4b2!2sImagine%20Tech%20Park%20-%20Genpact%20Kolkata%20Salt%20Lake%20Sector%20V!5e0!3m2!1sen!2sin!4v1709834636890!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="about-section">
+      <div class="mb-5">
+        <div class="heading">
+          <img id="office-location" src="{{ assetPath }}/location.png" alt="" />
+          <h1>Office Location</h1>
+        </div>
+        <p>
+          {{ officeLocation.corporateOffice }}
+        </p>
+      </div>
+      <div class="mb-5">
+        <div class="heading">
+          <img id="office-location" src="{{ assetPath }}/location.png" alt="" />
+          <h1>Factory Location</h1>
+        </div>
+        <p>
+          {{ officeLocation.factory }}
+        </p>
+      </div>
+      <div class="first-contact">
+        <div class="contact-number">
+          <h2>Sales department</h2>
+          <span class="contact-initials">
+            <span>(M):</span>
+            <img src="{{ assetPath }}/call.png" alt="" />
+            <a href="tel:{{ salesDepartmentNum1 }}">
+              {{ salesDepartmentNum1 }}
+            </a>
+            <span> / </span>
+            <a href="tel:{{ salesDepartmentNum2 }}">
+              {{ salesDepartmentNum2 }}
+            </a>
+          </span>
+        </div>
+        <!-- <div class="contact-number">
+          <h2>Service department</h2>
+          <a href="tel:9007350740">
+            <span class="contact-initials">
+              (M):
+              <img src="{{ assetPath }}/call.png" alt="" />
+            </span>
+            9007350740
+          </a>
+        </div> -->
+      </div>
+      <!-- <div class="second-contact">
+        <div class="contact-number">
+          <h2>Purchase department</h2>
+          <a href="tel:7605083985">
+            <span class="contact-initials">
+              (M):
+              <img src="{{ assetPath }}/call.png" alt="" />
+            </span>
+            7605083985
+          </a>
+        </div>
+        <div class="contact-number">
+          <h2>Complaint department</h2>
+          <a href="tel:9804267746"
+            ><span class="contact-initials">
+              (M):
+              <img src="{{ assetPath }}/call.png" alt="" />
+            </span>
+            9804267746
+          </a>
+        </div>
+      </div> -->
+
+      <div class="social-link">
+        <div>Follow us on :</div>
+        <a title="fb" [href]="facebookID">
+          <img src="{{ assetPath }}/fb.png" alt="" />
+        </a>
+        <a title="twitter" href="">
+          <img src="{{ assetPath }}/twitter.png" alt="" />
+        </a>
+        <a title="intra" [href]="instagramID">
+          <img src="{{ assetPath }}/intra.png" alt="" />
+        </a>
+        <a title="linkdin" href="">
+          <img src="{{ assetPath }}/linkdin.png" alt="" />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+} @placeholder {
+<div id="contact-section">Contact Section</div>
+}
+
+<div id="home-footer" class="footer">
+  <nav class="footer-section">
+    <a class="cursor-pointer" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/">
+      home
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/about" routerLinkActive="active" ariaCurrentWhenActive="page">
+      about
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/products" routerLinkActive="active" ariaCurrentWhenActive="page">
+      products
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/services" routerLinkActive="active" ariaCurrentWhenActive="page">
+      services
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/reviews" routerLinkActive="active" ariaCurrentWhenActive="page">
+      reviews
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/contact" routerLinkActive="active" ariaCurrentWhenActive="page">
+      contact us
+    </a>
+  </nav>
+  <div class="footer-link">www.movestone.in</div>
+</div>

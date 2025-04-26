@@ -1,0 +1,38 @@
+<div class="upload-container" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)">
+  <input type="file" title="upload" #fileInput (change)="onFilesSelected($event)" multiple hidden accept="image/png, image/gif, image/jpeg">
+  @if (!files.length && !existingImages.length) {
+  <div class="upload-area" [class.dragging]="isDragging">
+    <p class="fs-2">Drag and drop your files here or</p>
+    <div (click)="fileInput.click()">
+      <img src="{{assetPath}}/upload.svg" class="upload-icon" alt="">
+    </div>
+  </div>
+  } @else {
+  <div class="uploaded-items-area" [class.dragging]="isDragging">
+    <div class="file-preview">
+      @for (image of existingImages; track $index) {
+      <div class="file-preview-item mat-elevation-z8" [ngClass]="{'baseImage': image === product.imageURL}" (click)="updateImageURL(image)">
+        <img class="existing-image" [src]="image" alt="Image-{{ $index }}">
+        <i class="fa-solid fa-circle-xmark cross-icon" (click)="removeImage($index)"></i>
+        @if (image === product.imageURL) {
+        <img src="{{ assetPath }}/success.svg" class="selected-icon" alt="Selected">
+        }
+      </div>
+      }
+      @for (file of files; track $index) {
+      <div class="file-preview-item mat-elevation-z8">
+        @if (isImage(file)) {
+        <img [src]="file.preview" alt="{{ file.name }}">
+        }
+        <p>{{ file.name }}</p>
+        <i class="fa-solid fa-circle-xmark cross-icon" (click)="removeFile($index)"></i>
+      </div>
+      }
+    </div>
+    <button type="button" class="btn upload-btn" (click)="uploadFiles()">Upload</button>
+  </div>
+  <div class="file-preview-item upload-more" title="Upload More" (click)="fileInput.click()">
+    <img src="{{assetPath}}/upload.svg" class="upload-icon" alt="">
+  </div>
+  }
+</div>

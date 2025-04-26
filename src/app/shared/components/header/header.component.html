@@ -1,0 +1,91 @@
+<header class="header navbar-dark" [ngClass]="{
+    'header-active': isVerticalScroll || !isBannerPresent
+  }">
+  <div class="header-menu">
+    <div id="menu-btn" (click)="onMenuBtnClick()">
+      <i class="fas fa-bars" *ngIf="!isMenuVisible"></i>
+      <i class="fas fa-times" *ngIf="isMenuVisible"></i>
+    </div>
+    <a href="#">
+      <div class="icon">
+        <img src="{{ assetPath }}/Move_Stone_logo.png" alt="MoveStone" />
+      </div>
+    </a>
+
+    <nav class="navbar-section" [ngClass]="{ active: isMenuVisible }">
+      <a class="cursor-pointer" routerLinkActive="active" [ngClass]="{
+          'nav-option-active': globalVeriable.selectedPage === 'home'
+        }" ariaCurrentWhenActive="page" routerLink="/" (click)="selectNavOptions('home')">
+        home
+      </a>
+      <div class="vertical"></div>
+      <a class="cursor-pointer" routerLink="/pages/about" routerLinkActive="active" [ngClass]="{
+          'nav-option-active': globalVeriable.selectedPage === 'about'
+        }" ariaCurrentWhenActive="page" (click)="selectNavOptions('about')">
+        about
+      </a>
+      <div class="vertical"></div>
+      <div class="cursor-pointer product-area" [ngClass]="{
+          'nav-option-active': globalVeriable.selectedPage === 'products'
+        }" (click)="openProductMenu()">
+        <span class="product">
+          products
+          <span class="material-symbols-outlined"> keyboard_arrow_down </span>
+        </span>
+        <div class="dropdown-content mat-elevation-z8">
+          @for (eachProductItem of itemsToDisplayInProducts; track eachProductItem) {
+          <a mat-menu-item [routerLink]="['/pages/products', eachProductItem.id]" routerLinkActive="active" ariaCurrentWhenActive="page"
+            (click)="selectNavOptions('products')">
+            {{ eachProductItem.name }}
+          </a>
+          }
+        </div>
+      </div>
+      <div class="vertical"></div>
+      <a class="cursor-pointer" routerLink="/pages/services" [ngClass]="{
+          'nav-option-active': globalVeriable.selectedPage === 'services'
+        }" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="selectNavOptions('services')">
+        services
+      </a>
+      <div class="vertical"></div>
+      <a class="cursor-pointer" routerLink="/pages/reviews" [ngClass]="{
+          'nav-option-active': globalVeriable.selectedPage === 'reviews'
+        }" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="selectNavOptions('reviews')">
+        reviews
+      </a>
+      <div class="vertical"></div>
+      <a class="cursor-pointer" routerLink="/pages/contact" [ngClass]="{
+          'nav-option-active': globalVeriable.selectedPage === 'contact us'
+        }" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="selectNavOptions('contact us')">
+        contact us
+      </a>
+    </nav>
+
+    @if (!isUserLoggedIn && !getUserName) {
+    <div id="login-btn" class="login-btn" (click)="onLoginBtnClick()">
+      <img src="{{ assetPath }}/login.png" alt="" />
+      <span id="login-icon" class="login-icon">
+        <i class="far fa-user"></i>
+      </span>
+    </div>
+    } @else {
+    <label class="loggedin-user" for="loggedin-user" [cdkMenuTriggerFor]="menu">
+      <i id="loggedin-user" class="fas fa-user"></i>
+    </label>
+    <ng-template #menu>
+      <div class="loggedin-menu" cdkMenu>
+        <div class="loggedin-menu-item menu-heading">
+          {{ getUserName.toUpperCase() }}
+        </div>
+        <button type="button" class="loggedin-menu-item" cdkMenuItem (click)="logout()">
+          Logout
+        </button>
+        <button type="button" class="loggedin-menu-item" cdkMenuItem (click)="navigateToQuery()">
+          Check Queries
+        </button>
+      </div>
+    </ng-template>
+
+    }
+  </div>
+</header>

@@ -1,0 +1,153 @@
+<app-header [isBannerPresent]="bannerImages && bannerImages.length > 0">
+</app-header>
+<app-banner [bannerImages]="bannerImages"></app-banner>
+
+@defer (on viewport) {
+<div *ngIf="true" id="about-us" class="about-us">
+  <div class="section-1">
+    <img src="{{ assetPath }}/about-pic.jpg" alt="" />
+    <div class="section-1-text">
+      <div class="text1">
+        <p class="about-top-heading about-underline">OUR PHILOSOPHY</p>
+        <p class="about-heading">EVOLUTION OF ELECTRIC VEHICLES</p>
+        Electric Rickshaw is more popular in major cities of India , as an
+        alternative to auto rickshaw and pulled rickshaw since 2008 , because of
+        their easy to use and low fuel cost. The three wheelers powered by an
+        electric motor ranging from 650 to 1400 watts. Robert Davidson of
+        Scotland appears to have been the builder of the first electric car. One
+        of the first attempts to design electric rickshaw was done by Nimbkar
+        Agricultural Research Institute in late 1990 In India.
+      </div>
+      <div class="text-2">
+        <p class="about-top-heading about-underline">OUR HISTORY</p>
+        “Move Stone” is a well-known Brand of E-Rickshaw in India. The Company
+        is manufacturing E-Rickshaw since Aug’2020. We are selling our products
+        in West Bengal, Bihar, Assam, Tripura, Jharkhand, Uttar Pradesh,
+        Chhattisgarh, Madhya Pradesh & Orissa, apart of mentioned states we are
+        planning to supply shortly in Maharashtra & Rajasthan.
+      </div>
+
+      <div class="text3">
+        We are an I-CAT (<img
+          src="{{ assetPath }}/icat-logo.png"
+          class="icat-logo"
+        />) (International Centre for Automation Technology) approved E-rickshaw
+        manufacturing company incorporated with the intention to address the
+        robust growth potential of E-vehicle market in India. We are
+        manufacturing E-Rickshaw and planning enter in Electric Two wheeler
+        segment in coming days. Our manufacturing unit is situated at Utsav
+        Park, Bhagbatipur, Chatur Bhujkathi, Sankrail, Howrah- 711313. We have
+        an experienced team of engineers for post sales service
+      </div>
+
+      <div class="text4">
+        <p class="about-top-heading about-underline">Why us?</p>
+        Move Stone E-rickshaw is engaged in offering an intensive range of
+        E-vehicles. Our E-rickshaw are acknowledged in the automotive market for
+        their comfortable rides, with better handling and bringing out battery
+        efficiency at competitive prices. Move Stone is one of the most famous
+        and demanding brand for Electric Vehicle and battery E-rickshaw in
+        India. As Steve Jobs said “Be a yardstick of quality some people aren’t
+        used to an environment where excellence is expected”. Our E-rickshaw are
+        highly comfortable for the passengers as well as the driver and this is
+        pollution free and Eco-friendly.
+      </div>
+    </div>
+  </div>
+  <section class="section-2">
+    <div class="text1">
+      <p class="about-top-heading about-underline">Vision & Mision</p>
+      <p class="about-heading">Vision</p>
+      Our vision is to accelerate the advent of sustainable development by
+      making E-vehicles that are environment friendly in order to make world a
+      better place to live in. Here at Move Stone we create world class electric
+      mobility solutions for a greener and a healthier India.
+    </div>
+    <div class="text3">
+      <p class="about-heading">Mission</p>
+      Move Stone will lead the way to future of mobility, enriching lines around
+      the world with the safest and most responsible ways of moving people by
+      operating in a more organized way in E-vehicle industry by setting up
+      proper manufacturing, assembling, distributing, services and delivery
+      setups for utmost customer satisfaction.
+    </div>
+    <div class="text3">
+      <p class="about-top-heading about-underline">Market Overview</p>
+      Across India auto rickshaw make more than 250 million passenger trips per
+      day. That number is expected to more than double to 482 million by
+      2031.The range runs from 15000 to 30000 vehicles in medium sized
+      cities(population between 1 and 4 million)to more than 50,000 in large
+      cities. At present Indian Ev industry is at its nascent stage although the
+      country planned to be 100% electric by 2030. Electric-vehicle revolution
+      is gaining ground in India as the drivers of the ubiquitous three-wheelers
+      (E-rickshaw) weaving through crowded, smoggy streets discovered that
+      E-rickshaw are quieter, faster, cleaner and pocket friendly to maintain
+      than a traditional auto-rickshaw. Further E-rickshaw are less strenuous
+      than cycle rickshaws, which require all day peddling. So with more rides
+      possible in a day the E-rickshaw are proving more lucrative to market.
+    </div>
+  </section>
+  <app-contact-footer></app-contact-footer>
+</div>
+} @placeholder {
+<div>Featured Section</div>
+}
+
+<div id="about-us-footer" class="footer">
+  <nav class="footer-section">
+    <a
+      class="cursor-pointer"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      routerLink="/"
+    >
+      home
+    </a>
+    <div class="vertical"></div>
+    <a
+      class="cursor-pointer"
+      routerLink="/pages/about"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      about
+    </a>
+    <div class="vertical"></div>
+    <a
+      class="cursor-pointer"
+      routerLink="/pages/products"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      products
+    </a>
+    <div class="vertical"></div>
+    <a
+      class="cursor-pointer"
+      routerLink="/pages/services"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      services
+    </a>
+    <div class="vertical"></div>
+    <a
+      class="cursor-pointer"
+      routerLink="/pages/reviews"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      reviews
+    </a>
+    <div class="vertical"></div>
+    <a
+      class="cursor-pointer"
+      routerLink="/pages/contact"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      contact us
+    </a>
+  </nav>
+  <div class="footer-link">www.movestone.in</div>
+</div>

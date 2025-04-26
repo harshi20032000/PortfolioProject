@@ -1,0 +1,26 @@
+@if (imagesToDisplay && diaplayConfig) { @if (screenWidth > 750) {
+<div class="vehicle-images">
+  <swiper-container
+    fmSwiper
+    [config]="diaplayConfig"
+    init="false"
+    class="image-slider"
+  >
+    @for (eachImage of imagesToDisplay; track eachImage) {
+    <swiper-slide class="box">
+      <img [src]="eachImage?.productImageURL" alt="image" loading="lazy" />
+    </swiper-slide>
+    }
+  </swiper-container>
+</div>
+} @else {
+<div class="container">
+  <div class="gallery">
+    @for (eachImage of imagesToDisplay; track eachImage) {
+    <a [href]="eachImage?.productImageURL" data-lightbox="models">
+      <img [src]="eachImage?.productImageURL" alt="image" loading="lazy" />
+    </a>
+    }
+  </div>
+</div>
+} }

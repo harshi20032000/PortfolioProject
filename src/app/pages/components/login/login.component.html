@@ -1,0 +1,27 @@
+<div class="login-form-container">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <label for="user-login">
+      User Login
+      <i
+        class="fas fa-times close-login-form"
+        id="user-login"
+        (click)="closeLoginPopup()"
+      ></i>
+    </label>
+    <input
+      type="email"
+      formControlName="email"
+      placeholder="Username"
+      id="email"
+      class="box"
+    />
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="password"
+      id="password"
+      class="box"
+    />
+    <button type="submit" class="btn">Login</button>
+  </form>
+</div>

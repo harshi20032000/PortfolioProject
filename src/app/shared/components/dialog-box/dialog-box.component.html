@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content class="dialog-content">
+  @if (type === 'error') {
+  <div class="error-logo">
+    <mat-icon class="material-symbols-outlined"> error </mat-icon>
+  </div>
+  } @else if (type === 'success') {
+  <div class="success-logo">
+    <mat-icon class="material-symbols-outlined"> check </mat-icon>
+  </div>
+  }
+  @if (this.inputLevel && inputForm) {
+  <form class="contact-page-section">
+    <div class="contact-form">
+      <div class="form-group">
+        <label for="InputForm">{{inputLevel}} *</label>
+        <mat-form-field appearance="outline" class="mat-input">
+          <input matInput [formControl]="inputForm" type="text" name="InputForm" id="InputForm" required />
+          @if (inputForm.hasError('required')) {
+          <mat-error> {{inputLevel}} is required </mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  }
+  <h4>{{ message }}</h4>
+</div>
+<div mat-dialog-actions>
+  @if (buttons && buttons.length > 0) {
+  @for (button of buttons; track button; let index = $index) {
+  @if (index < buttons.length - 1) { <button mat-button (click)="closeDialog(button)">
+    {{ button }}
+    </button>
+    } @else { <button class="btn" style="margin-left: auto" cdkFocusInitial (click)="closeDialog(button)">
+      {{ button }}
+    </button>
+    }
+    }
+    }
+</div>

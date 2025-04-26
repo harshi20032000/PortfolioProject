@@ -1,0 +1,134 @@
+@if (product) {
+<app-header></app-header>
+
+<section id="product-page">
+  @defer (on viewport) {
+  <div class="product-view">
+    <div class="product-image">
+      @if (selectedImage) {
+      <img [src]="selectedImage" alt="Image" />
+      } @else {
+      <img src="{{ assetPath }}/Image-not-available.jpg" alt="No-Image" />
+      }
+
+      <div class="color-options">
+        @for(eachColor of product.colorOptions.split(','); track eachColor) {
+        <span class="color-dot" [ngStyle]="{ 'background-color': eachColor }" (click)="changeSelectedColor(eachColor)">
+        </span>
+        }
+      </div>
+
+      @if (images && images.length > 0) {
+      <div class="small-img-row">
+        @for (eachImage of images; track $index) {
+        <div class="small-img-col">
+          <img [src]="eachImage" alt="Image-{{ $index }}" (click)="changeSelectedImage(eachImage)" />
+        </div>
+        }
+      </div>
+      }
+    </div>
+    <h1 class="product-name">{{ product.productName }}</h1>
+    <h3>SPECIFICATION</h3>
+
+    <div id="product-feature" class="product-feature">
+      <ng-container *ngIf="getScreenWidth >= 750; else showFullTable">
+        <div class="features-table">
+          <div class="feature-header">
+            <div class="left-part feature-header-item">Item</div>
+            <div class="right-part feature-header-item">
+              {{ product.productName }}
+            </div>
+          </div>
+          @for(eachProductFeature of getProductFeatures.slice( 0,
+          getProductFeatures.length / 2 ); track eachProductFeature) {
+          @if(product[eachProductFeature]) {
+          <div class="feature-body">
+            <div class="left-part feature-header-item">
+              {{ productFeatures[eachProductFeature] }}
+            </div>
+            <div class="right-part feature-body-item">
+              {{ product[eachProductFeature] }}
+            </div>
+          </div>
+          } }
+        </div>
+        <div class="features-table">
+          <div class="feature-header">
+            <div class="left-part feature-header-item">Item</div>
+            <div class="right-part feature-header-item">
+              {{ product.productName }}
+            </div>
+          </div>
+          @for(eachProductFeature of getProductFeatures.slice(
+          getProductFeatures.length / 2 ); track eachProductFeature) {
+          @if(product[eachProductFeature]) {
+          <div class="feature-body">
+            <div class="left-part feature-header-item">
+              {{ productFeatures[eachProductFeature] }}
+            </div>
+            <div class="right-part feature-body-item">
+              {{ product[eachProductFeature] }}
+            </div>
+          </div>
+          } }
+        </div>
+      </ng-container>
+      <ng-template #showFullTable>
+        <div class="features-table">
+          <div class="feature-header">
+            <div class="left-part feature-header-item">Item</div>
+            <div class="right-part feature-header-item">
+              {{ product.productName }}
+            </div>
+          </div>
+          @for(eachProductFeature of getProductFeatures; track
+          eachProductFeature) { @if(product[eachProductFeature]) {
+          <div class="feature-body">
+            <div class="left-part feature-header-item">
+              {{ productFeatures[eachProductFeature] }}
+            </div>
+            <div class="right-part feature-body-item">
+              {{ product[eachProductFeature] }}
+            </div>
+          </div>
+          } }
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  } @placeholder {
+  <div>product View Section</div>
+  }
+  <app-contact-footer></app-contact-footer>
+</section>
+}
+
+<div id="product-footer" class="footer">
+  <nav class="footer-section">
+    <a class="cursor-pointer" routerLinkActive="active" ariaCurrentWhenActive="page" routerLink="/">
+      home
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/about" routerLinkActive="active" ariaCurrentWhenActive="page">
+      about
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/products" routerLinkActive="active" ariaCurrentWhenActive="page">
+      products
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/services" routerLinkActive="active" ariaCurrentWhenActive="page">
+      services
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/reviews" routerLinkActive="active" ariaCurrentWhenActive="page">
+      reviews
+    </a>
+    <div class="vertical"></div>
+    <a class="cursor-pointer" routerLink="/pages/contact" routerLinkActive="active" ariaCurrentWhenActive="page">
+      contact us
+    </a>
+  </nav>
+  <div class="footer-link">www.movestone.in</div>
+</div>
