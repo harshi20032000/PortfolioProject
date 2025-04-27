@@ -4,19 +4,26 @@ import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import {DataFetchService} from 'src/app/shared/services/data-fetch.service'
+import { PRODUCT_DETAILS } from '../constants/product-details';
 
 @Injectable({
   providedIn: 'root',
 })
 class ProductSpecResolver {
-  constructor(private http: HttpClient) {}
+  private dataFetchService =inject(DataFetchService);
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.http
-      .post(`${environment.baseUrl}/getProductDetails`, {
-        productID: route.params['id'],
-      })
+    const productId =route.params['id'];
+
+    const apiCall =() => this.dataFetchService['http']
+    .post(`${environment.baseUrl}/getProductDetails`, {productId})
       .pipe(map((data: any) => data.responsePayload));
+
+      const mockData = {
+        productDetails : PRODUCT_DETAILS.find(e=>e.productID==productId)
+      };
+      return this.dataFetchService.fetch(apiCall, mockData);
   }
 }
 
