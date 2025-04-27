@@ -1,20 +1,19 @@
-import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { ConfigPayload } from '../models/config-payload';
-import { of } from 'rxjs';
+import { DataFetchService } from 'src/app/shared/services/data-fetch.service';
 import { CONFIG_DETAILS } from '../constants/config-details';
+import { ConfigPayload } from '../models/config-payload';
 
-export const getConfigResolver: ResolveFn<any> = (
-  route: ActivatedRouteSnapshot
-): Observable<any> => {
-  if (environment.useMockData) {
-    return of(CONFIG_DETAILS);
-  }
-  else {
-    const http = inject(HttpClient);
+@Injectable({
+  providedIn: 'root',
+})
+class ConfigResolver {
+  private dataFetchService = inject(DataFetchService);
+
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const pageName = route.url[0].path;
     const specificParamKeys = route.params;
 
@@ -28,6 +27,18 @@ export const getConfigResolver: ResolveFn<any> = (
         : postBody.pageName;
     });
 
-    return http.post(`${environment.baseUrl}/GetConfig`, postBody);
+    const apiCall = () => this.dataFetchService['http']
+      .post(`${environment.baseUrl}/GetConfig`, postBody)
+      .pipe(map((data: any) => data?.responsePayload));
+
+    const mockData = CONFIG_DETAILS;
+
+    return this.dataFetchService.fetch(apiCall, mockData);
   }
+}
+
+export const getConfigResolver: ResolveFn<any> = (
+  route: ActivatedRouteSnapshot
+) => {
+  return inject(ConfigResolver).resolve(route);
 };
