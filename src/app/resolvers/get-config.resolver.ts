@@ -4,23 +4,30 @@ import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ConfigPayload } from '../models/config-payload';
+import { of } from 'rxjs';
+import { CONFIG_DETAILS } from '../constants/config-details';
 
 export const getConfigResolver: ResolveFn<any> = (
   route: ActivatedRouteSnapshot
 ): Observable<any> => {
-  const http = inject(HttpClient);
-  const pageName = route.url[0].path;
-  const specificParamKeys = route.params;
+  if (environment.useMockData) {
+    return of(CONFIG_DETAILS);
+  }
+  else {
+    const http = inject(HttpClient);
+    const pageName = route.url[0].path;
+    const specificParamKeys = route.params;
 
-  const postBody: ConfigPayload = {
-    pageName,
-  };
+    const postBody: ConfigPayload = {
+      pageName,
+    };
 
-  Object.values(specificParamKeys).forEach((eachParam: string) => {
-    postBody.pageName = eachParam
-      ? `${postBody.pageName}-${eachParam}`
-      : postBody.pageName;
-  });
+    Object.values(specificParamKeys).forEach((eachParam: string) => {
+      postBody.pageName = eachParam
+        ? `${postBody.pageName}-${eachParam}`
+        : postBody.pageName;
+    });
 
-  return http.post(`${environment.baseUrl}/GetConfig`, postBody);
+    return http.post(`${environment.baseUrl}/GetConfig`, postBody);
+  }
 };
