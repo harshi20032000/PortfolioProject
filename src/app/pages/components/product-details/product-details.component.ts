@@ -1,21 +1,24 @@
+import { ViewportScroller } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ViewportScroller } from '@angular/common';
-import { ProductDetailsService } from 'src/app/shared/services/ProductDetailsService';
+import { Observable, of } from 'rxjs';
 import { CONSTANTS } from 'src/app/constants/constants';
+import { PRODUCT_IMAGES } from 'src/app/constants/product-images';
+import { DialogData } from 'src/app/models/dialog-data';
 import { LoaderService } from 'src/app/shared/services/loader.service';
 import { MatDialogService } from 'src/app/shared/services/mat-dialog.service';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
   imports: [SharedModule],
   templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css'],
+  styleUrl: './product-details.component.css',
 })
 export class ProductDetailsComponent implements OnInit {
   images!: Array<any>;
@@ -37,7 +40,7 @@ export class ProductDetailsComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private productDetailsService: ProductDetailsService,
+    private http: HttpClient,
     private dialogService: MatDialogService,
     private viewportScroller: ViewportScroller,
     private loader: LoaderService
@@ -73,15 +76,39 @@ export class ProductDetailsComponent implements OnInit {
 
   getProductImages(): void {
     this.loader.setLoading(true, `${environment.baseUrl}/getImageByColor`);
-    this.productDetailsService.getProductImages(this.product.productID, this.selectedColor).subscribe(
+    this.getImagesByColor(this.product.productID, this.selectedColor).subscribe(
       (data: any) => {
         if (data && !data.hasError) {
           this.images = data.responsePayload?.pictures;
           this.selectedImage = this.images[0];
-          this.loader.setLoading(false, `${environment.baseUrl}/getImageByColor`);
+          this.loader.setLoading(
+            false,
+            `${environment.baseUrl}/getImageByColor`
+          );
         }
       }
     );
+  }
+
+  getImagesByColor(
+    productID: string,
+    productColorHex: string
+  ): Observable<any> {
+    const postBody = {
+      productID,
+      productColorHex,
+    };
+   // return this.http.post(`${environment.baseUrl}/getImageByColor`, postBody);
+
+    /**
+     * Done For Static Data Fetch
+     */
+    return of({
+      responsePayload: PRODUCT_IMAGES.find(
+        (ele) =>
+          ele.productID === productID && ele.productColorHex === productColorHex
+      ),
+    });
   }
 
   colorOption(index: number): string {
@@ -99,17 +126,19 @@ export class ProductDetailsComponent implements OnInit {
           this.queryForm.value.queryMessage,
         forProduct: this.product.productId,
       };
-      this.productDetailsService.sendQuery(payload).subscribe((data: any) => {
-        this.dialogService.openDialog({
-          data: {
-            title: data.hasError ? 'Error' : 'Success',
-            type: data.hasError ? 'error' : 'success',
-            message: data.hasError
-              ? data.extendedMessage
-              : 'Query raised successfully',
-          },
+      this.http
+        .post(`${environment.baseUrl}/createQuery`, payload)
+        .subscribe((data: any) => {
+          this.dialogService.openDialog({
+            data: {
+              title: data.hasError ? 'Error' : 'Success',
+              type: data.hasError ? 'error' : 'success',
+              message: data.hasError
+                ? data.extendedMessage
+                : 'Query raised successfully',
+            } as DialogData,
+          });
         });
-      });
     } else {
       this.queryForm.markAllAsTouched();
     }
