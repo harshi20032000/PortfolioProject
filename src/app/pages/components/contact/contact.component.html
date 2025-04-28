@@ -4,67 +4,7 @@
 
 @defer (on viewport) {
 <section id="contact-page-section" class="contact-page-section">
-  <form [formGroup]="queryForm">
-    <div class="contact-form">
-      <div class="form-group">
-        <label for="name">First Name</label>
-        <mat-form-field appearance="outline" class="mat-input">
-          <input matInput formControlName="firstName" type="text" name="first-name" id="first-name" required />
-          <mat-error *ngIf="queryForm.get('firstName')?.hasError('required')">
-            First Name is required
-          </mat-error>
-        </mat-form-field>
-      </div>
 
-      <div class="form-group">
-        <label for="name">Last Name</label>
-        <mat-form-field appearance="outline" class="mat-input">
-          <input matInput formControlName="lastName" type="text" name="last-name" id="last-name" required />
-          <mat-error *ngIf="queryForm.get('lastName')?.hasError('required')">
-            Last name is required
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="contact-form">
-      <div class="form-group">
-        <label for="name">Email</label>
-        <mat-form-field appearance="outline" class="mat-input">
-          <input matInput formControlName="email" type="email" name="email" id="email" required />
-          <mat-error *ngIf="queryForm.get('email')?.hasError('required')">
-            Email is required
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="form-group">
-        <label for="name">Number</label>
-        <mat-form-field appearance="outline" class="mat-input">
-          <input matInput formControlName="number" type="number" name="number" id="number" required />
-          <mat-error *ngIf="queryForm.get('number')?.hasError('required')">
-            Number is required
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="contact-form">
-      <div class="form-group">
-        <label for="name">Message</label>
-        <mat-form-field appearance="outline" class="mat-input">
-          <textarea matInput formControlName="queryMessage" name="message" title="message" id="message" required>
-          </textarea>
-          <mat-error *ngIf="queryForm.get('queryMessage')?.hasError('required')">
-            Message is required
-          </mat-error>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <button (click)="sendQuery()" type="button" class="btn contact-message">
-      Send Query
-    </button>
-  </form>
   <div class="contact-view">
     <div class="contact-info">
       <h1>contact <span>info</span></h1>
